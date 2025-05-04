@@ -9,15 +9,15 @@ import os
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
-setup(name = "PyMTP",
-      version = "0.1.0",
-      description = "LibMTP bindings in Python",
+setup(name = "pymtp_gf",
+      version = "0.1.1",
+      description = "Custom fork of PyMTP with changes/updates",
       long_description=read('README'),
-      author = "Nick Devito",
-      author_email = "nick@nick125.com",
-      maintainer = "Hans-Christoph Steiner",
-      maintainer_email = "hans@eds.org",
-      url = "https://pypi.python.org/pypi/pymtp",
+      author = "GloriousFusion",
+      author_email = "lk.archcontact@gmail.com",
+      maintainer = "GloriousFusion",
+      maintainer_email = "lk.archcontact@gmail.com",
+      url = "https://github.com/GloriousFusion/pymtp-gf",
       py_modules = ["pymtp"],
       classifiers=[
           'Intended Audience :: Developers',
