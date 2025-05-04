@@ -894,8 +894,9 @@ class MTP:
 			ret.append(tmp[key])
 
 		return ret
-
-	def create_folder(self, name, parent=0):
+	
+	### Added missing storage
+	def create_folder(self, name, parent=0, storage=0):
 		"""
 			This creates a new folder in the parent. If the parent
 			is 0, it will go in the main directory.
@@ -911,7 +912,7 @@ class MTP:
 		if (self.device == None):
 			raise NotConnected
 
-		ret = self.mtp.LIBMTP_Create_Folder(self.device, name, parent)
+		ret = self.mtp.LIBMTP_Create_Folder(self.device, name, parent, storage)
 
 		if (ret == 0):
 			self.debug_stack()
