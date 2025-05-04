@@ -537,7 +537,8 @@ class MTP:
 		else:
 			return LIBMTP_Filetype["UNKNOWN"]
 
-	def send_file_from_file(self, source, target, parent=0, callback=None):
+	### Added missing parent_id
+	def send_file_from_file(self, source, target, parent_id=0, callback=None):
 		"""
 			Sends a file from the filesystem to the connected device
 			and stores it at the target filename inside the parent.
@@ -569,12 +570,15 @@ class MTP:
 		if (callback != None):
 			callback = Progressfunc(callback)
 
-		metadata = LIBMTP_File(filename=target, \
+		metadata = LIBMTP_File(filename=target.encode(), \
 		  filetype=self.find_filetype(source), \
-		  filesize=os.stat(source).st_size)
+		  filesize=os.stat(source).st_size, \
+		  parent_id=parent_id
+		)
 
-		ret = self.mtp.LIBMTP_Send_File_From_File(self.device, source, \
-		  ctypes.pointer(metadata), callback, None, parent)
+		### Added ctype encoding for source
+		ret = self.mtp.LIBMTP_Send_File_From_File(self.device, ctypes.c_char_p(source.encode("utf-8")), \
+		  ctypes.pointer(metadata), callback, None)
 
 		if (ret != 0):
 			self.debug_stack()
@@ -582,7 +586,7 @@ class MTP:
 
 		return metadata.item_id
 
-	def send_track_from_file(self, source, target, metadata, parent=0, callback=None):
+	def send_track_from_file(self, source, target, metadata, callback=None):
 		"""
 			Sends a track from the filesystem to the connected
 			device
@@ -614,12 +618,12 @@ class MTP:
 			callback = Progressfunc(callback)
 
 		metadata.filename = target
-		metadata.parent_id = parent
 		metadata.filetype = self.find_filetype(source)
 		metadata.filesize = os.stat(source).st_size
 
-		ret = self.mtp.LIBMTP_Send_Track_From_File(self.device, source, \
-		  ctypes.pointer(metadata), callback, None, parent)
+		### Added ctype encoding for source
+		ret = self.mtp.LIBMTP_Send_Track_From_File(self.device, ctypes.c_char_p(source.encode("utf-8")), \
+		  ctypes.pointer(metadata), callback, None)
 
 		if (ret != 0):
 			self.debug_stack()
@@ -829,7 +833,8 @@ class MTP:
 
 			# Check if this ID exists, if not, add it
 			# and trigger a scan of the children
-			if not (ret.has_key(next.folder_id)):
+			### Updated for python 3
+			if next.folder_id not in ret:
 				ret[next.folder_id] = next
 				scanned = False
 
@@ -871,7 +876,8 @@ class MTP:
 		while True:
 			next = next.contents
 			## Check if this folder is in the dict
-			if not (tmp.has_key(next.folder_id)):
+			### Updated for python 3
+			if next.folder_id not in tmp:
 				tmp[next.folder_id] = next
 
 			# Check for siblings
