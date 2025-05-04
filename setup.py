@@ -9,7 +9,7 @@ import os
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
-setup(name = "pymtp_gf",
+setup(name = "pymtp-gf",
       version = "0.1.1",
       description = "Custom fork of PyMTP with changes/updates",
       long_description=read('README'),
