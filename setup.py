@@ -18,7 +18,7 @@ setup(name = "pymtp-gf",
       maintainer = "GloriousFusion",
       maintainer_email = "lk.archcontact@gmail.com",
       url = "https://github.com/GloriousFusion/pymtp-gf",
-      py_modules = ["pymtp"],
+      packages = ["pymtp"],
       classifiers=[
           'Intended Audience :: Developers',
           'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
