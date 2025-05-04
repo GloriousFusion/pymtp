@@ -23,7 +23,7 @@
 		>>>
 """
 
-__VERSION__ = "0.1.0"
+__VERSION__ = "0.1.1"
 __VERSION_MACRO__ = 0
 __VERSION_MINOR__ = 1
 __VERSION_MAJOR__ = 0
