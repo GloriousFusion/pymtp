@@ -1,3 +1,19 @@
+0.1.1 (Fork):
+
+- Compatibility with python 3
+- Few changes in functions
+
+Build
+------
+Build as package:
+	git clone https://github.com/GloriousFusion/pymtp-gf
+	cd pymtp-gf
+	python setup.py sdist
+
+
+
+0.1.0 (Original):
+
 About
 ------
 pymtp is a Pythonic binding to LibMTP that allows Python programs to interact
